@@ -8,7 +8,7 @@ public class Function {
          * a = 0
          * */
 
-        if (x < -1 || x > 1) {
+        if (x < -1 || x > 1 || Double.isNaN(x)) {
             throw new IncorrectInputArgument("Incorrect argument. Allowed values: [-1; 1]");
         }
         return PI / 2 - x - pow(x, 3) / 6 - (3 * pow(x, 5)) / 40;
