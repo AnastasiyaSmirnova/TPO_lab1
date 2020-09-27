@@ -13,7 +13,7 @@ public class FibonacciHeap {
     public static final double PHI = (1 + Math.sqrt(5)) / 2;
 
     public FibonacciHeap() {
-        minNode = new HeapNode(Integer.MAX_VALUE);
+        minNode = null;
         numOfTrees = 0;
         size = 0;
     }
@@ -82,7 +82,7 @@ public class FibonacciHeap {
      */
     public HeapNode insert(int key) {
         if (key < 0) {
-            System.err.println("negative keys are prohibited");
+            System.err.print("negative keys are prohibited");
         }
         HeapNode node = new HeapNode(key);
         if (isHeapEmpty()) {
@@ -210,9 +210,16 @@ public class FibonacciHeap {
      * <p>
      * O(n) complexity w.c - using CascadingCut - O(n) complexity w.c
      */
-    public void decreaseKey(HeapNode x, int delta) {
-        if (x == null)
-            return;
+    public void decreaseKey(HeapNode x, int delta) throws IllegalHeapNode {
+        if (x == null) {
+            throw new IllegalHeapNode("Unable to decrease null element");
+        }
+        if (x.key - delta < 0) {
+            throw new IllegalHeapNode("Negative result key");
+        }
+        if (x.getNext().getKey() == x.getKey() && (minNode == null || x.getKey() != getMin().getKey())) {
+            throw new IllegalHeapNode("Unknown heap node. Unable to decrease");
+        }
         x.key = x.key - delta;
         if (x.parent != null) {
             if (x.key < x.parent.key)
@@ -232,7 +239,7 @@ public class FibonacciHeap {
      * <p>
      * O(n) complexity w.c - using decreaseKey - O(n) w.c and deleteMin O(n) w.c
      */
-    public void delete(HeapNode x) {
+    public void delete(HeapNode x) throws IllegalHeapNode {
         if (x == null)
             return;
         decreaseKey(x, Integer.MAX_VALUE);
