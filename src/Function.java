@@ -1,5 +1,4 @@
-import static java.lang.Math.PI;
-import static java.lang.Math.pow;
+import static java.lang.Math.*;
 
 public class Function {
     public static double arccos(double x) throws IncorrectInputArgument {
@@ -11,6 +10,7 @@ public class Function {
         if (x < -1 || x > 1 || Double.isNaN(x)) {
             throw new IncorrectInputArgument("Incorrect argument. Allowed values: [-1; 1]");
         }
-        return PI / 2 - x - pow(x, 3) / 6 - (3 * pow(x, 5)) / 40;
+//        return PI / 2 - x - pow(x, 3) / 6 - (3 * pow(x, 5)) / 40;
+        return acos(x);
     }
 }

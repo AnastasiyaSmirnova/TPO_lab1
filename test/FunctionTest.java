@@ -9,7 +9,7 @@ import static java.lang.Math.*;
 public class FunctionTest {
 
     @Test
-    public void arccos_MINUS_1() throws IncorrectInputArgument {
+    public void arccos_Minus1() throws IncorrectInputArgument {
         double actual = Function.arccos(-1);
         double expected = PI;
         Assert.assertEquals(expected, actual, pow(10, -6));
@@ -24,7 +24,7 @@ public class FunctionTest {
 
     @Test
     public void arccos_3PI_4() throws IncorrectInputArgument {
-        double actual = Function.arccos(-0.5 * pow(1, 0.5));
+        double actual = Function.arccos(-0.5 * pow(2, 0.5));
         double expected = 3 * PI / 4;
         Assert.assertEquals(expected, actual, pow(10, -6));
     }
@@ -65,7 +65,7 @@ public class FunctionTest {
     }
 
     @Test
-    public void arccos_PLUS_1() throws IncorrectInputArgument {
+    public void arccos_Plus1() throws IncorrectInputArgument {
         double actual = Function.arccos(1);
         double expected = 0;
         Assert.assertEquals(expected, actual, pow(10, -6));
@@ -73,13 +73,13 @@ public class FunctionTest {
 
 
     @Test(expected = IncorrectInputArgument.class)
-    public void arccos_EXCEPTION_1() throws IncorrectInputArgument {
-        Function.arccos(-1.1);
+    public void arccos_ExceptionBigger1() throws IncorrectInputArgument {
+        Function.arccos(1+pow(10,-6));
     }
 
     @Test(expected = IncorrectInputArgument.class)
-    public void arccos_EXCEPTION_2() throws IncorrectInputArgument {
-        Function.arccos(1.1);
+    public void arccos_ExceptonSmallerMinus1() throws IncorrectInputArgument {
+        Function.arccos(-1-pow(10,-6));
     }
 
     @Test(expected = IncorrectInputArgument.class)
