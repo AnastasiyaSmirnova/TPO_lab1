@@ -3,8 +3,16 @@ package domain;
 import java.util.ArrayList;
 
 public class MutateHuman extends Human {
+    /* dif between usual VS mutate => number of heads; number of heads define status of being */
     private int priority;
     private ArrayList<String> allowedActions;
+
+    public MutateHuman(String name, int headNumbers) {
+        super(name, EmotionalCondition.HAPPY, HumanAttention.ABSENT_MINDED, headNumbers, BodyPosition.SIT);
+        this.priority = headNumbers * 2;
+        allowedActions = new ArrayList<>();
+        setAllowedActions();
+    }
 
     public int getPriority() {
         return priority;
@@ -14,28 +22,44 @@ public class MutateHuman extends Human {
         this.priority = priority;
     }
 
-    public MutateHuman(String name, int headNumbers) {
-        super(name, EmotionalCondition.HAPPY, HumanAttention.ABSENT_MINDED, headNumbers, BodyPosition.SIT);
-        this.priority = headNumbers * 2;
-        allowedActions = new ArrayList<>();
-        setAllowedActions();
-    }
-
     private void changePriority() {
         setPriority(getBody().getNumberOfHeads() * 2);
         setAllowedActions();
     }
 
     public void addNewHead() {
-        getBody().setNumberOfHeads(getBody().getNumberOfHeads() + 1);
-        changePriority();
+        boolean r = getBody().addNewHead();
+        if (r) {
+            changePriority();
+        }
     }
 
-    public void removeHead() {
-        int currentHeadNumber = getBody().getNumberOfHeads();
-        if (currentHeadNumber > 1) {
-            getBody().setNumberOfHeads(currentHeadNumber - 1);
-            changePriority();
+    public void addNewActivity(int headNumber, String activity) {
+        if (isActivityAllowed(activity)){
+            getBody().addActivityToHead(headNumber, activity);
+        }
+    }
+
+    public void removeHead(int headNumber) {
+        boolean r = getBody().removeHead(headNumber);
+        if (r) changePriority();
+    }
+
+    public ArrayList<String> getAllowedActions() {
+        return allowedActions;
+    }
+
+    private boolean isActivityAllowed(String action) {
+        switch (action) {
+            case "control usual humans":
+            case "use control panel":
+            case "use the main computer":
+            case "absolute power": {
+                return allowedActions.indexOf(action) >= 0;
+            }
+            default: {
+                return true;
+            }
         }
     }
 

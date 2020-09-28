@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-
 public class UsualHuman extends Human {
     private boolean isUniqueOpportunities;
     private StrangeThings things;
