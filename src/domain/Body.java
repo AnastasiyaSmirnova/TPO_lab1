@@ -55,23 +55,26 @@ public class Body {
         return r;
     }
 
-    void addActivityToHead(int headNumber, String newActivity) {
-        getHeadByNumber(numberOfHeads).addActivity(newActivity);
+    boolean addActivityToHead(int headNumber, String newActivity) {
+        if (!getHeadActivities(headNumber).contains(newActivity)) {
+            return getHeadByNumber(headNumber).addActivity(newActivity);
+        }
+        return false;
     }
 
-    public boolean removeActivity(int headNumber, String activity) {
+    boolean removeActivity(int headNumber, String activity) {
         return getHeadByNumber(headNumber).removeActivity(activity);
     }
 
-    public void clearHeadActivities(int headNumber) {
-        getHeadByNumber(headNumber).clearActivitiesList();
+    boolean clearHeadActivities(int headNumber) {
+        return getHeadByNumber(headNumber).clearActivitiesList();
     }
 
-    public ArrayList<String> getHeadActivities(int headNumber) {
+    ArrayList<String> getHeadActivities(int headNumber) {
         return getHeadByNumber(headNumber).getActivities();
     }
 
-    public boolean isHeadFree(int headNumber) {
+    boolean isHeadFree(int headNumber) {
         return getHeadByNumber(headNumber).isFree();
     }
 
@@ -96,18 +99,19 @@ public class Body {
             this.activities = new ArrayList<>();
         }
 
-        public void setFree(boolean free) {
+        void setFree(boolean free) {
             isFree = free;
         }
 
-        public void addActivity(String newActivity) {
+        boolean addActivity(String newActivity) {
             boolean r = this.activities.add(newActivity);
             if (r) {
                 setFree(false);
             }
+            return r;
         }
 
-        public boolean removeActivity(String activity) {
+        boolean removeActivity(String activity) {
             boolean r = activities.remove(activity);
             if (r && activities.size() == 0) {
                 setFree(true);
@@ -115,20 +119,21 @@ public class Body {
             return r;
         }
 
-        public void clearActivitiesList() {
+        boolean clearActivitiesList() {
             activities.clear();
             setFree(true);
+            return true;
         }
 
-        public int getHeadNumber() {
+        int getHeadNumber() {
             return headNumber;
         }
 
-        public boolean isFree() {
+        boolean isFree() {
             return isFree;
         }
 
-        public ArrayList<String> getActivities() {
+        ArrayList<String> getActivities() {
             return activities;
         }
     }
