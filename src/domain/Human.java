@@ -2,13 +2,15 @@ package domain;
 
 import java.util.ArrayList;
 
-public class Human {
+abstract public class Human {
     private String name;
     private ArrayList<EmotionalCondition> emotionalConditions;
     private Body body;
     private HumanAttention attention;
 
-    public Human(String name, EmotionalCondition startEmotionCondition, HumanAttention attention, BodyPosition position) {
+    public Human(String name, EmotionalCondition startEmotionCondition, HumanAttention attention, BodyPosition position) throws IncorrectNameException {
+        if (name == null || name.length() == 0) throw new IncorrectNameException();
+
         this.name = name;
         this.emotionalConditions = new ArrayList<>();
         emotionalConditions.add(startEmotionCondition);
@@ -16,7 +18,9 @@ public class Human {
         body = new Body(position);
     }
 
-    public Human(String name, EmotionalCondition startEmotionCondition, HumanAttention attention, int headNumbers, BodyPosition position) {
+    public Human(String name, EmotionalCondition startEmotionCondition, HumanAttention attention, int headNumbers, BodyPosition position) throws IncorrectNameException {
+        if (name == null || name.length() == 0) throw new IncorrectNameException();
+
         this.name = name;
         this.emotionalConditions = new ArrayList<>();
         this.emotionalConditions = new ArrayList<>();
@@ -42,18 +46,6 @@ public class Human {
         return attention;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmotionalConditions(ArrayList<EmotionalCondition> emotionalConditions) {
-        this.emotionalConditions = emotionalConditions;
-    }
-
-    public void setBody(Body body) {
-        this.body = body;
-    }
-
     public void setAttention(HumanAttention attention) {
         this.attention = attention;
     }
@@ -63,6 +55,7 @@ public class Human {
         if (body.getPosition() == BodyPosition.SIT) {
             standUp();
         }
+        getBody().setPosition(BodyPosition.GO);
     }
 
     public void standUp() {
@@ -81,6 +74,7 @@ public class Human {
         emotionalConditions.clear();
         emotionalConditions.add(EmotionalCondition.HAPPY);
         emotionalConditions.add(EmotionalCondition.CALM);
+        setAttention(HumanAttention.ABSENT_MINDED);
     }
 
     public void calmDown() {
@@ -90,7 +84,7 @@ public class Human {
     }
 
     public void shocked() { // there are two staged of shock: small -> nervous, big -> absent-minded)
-        if (getEmotionalCondition().contains(EmotionalCondition.SURPRISED)) {
+        if (getEmotionalCondition().contains(EmotionalCondition.SURPRISED) || getEmotionalCondition().contains(EmotionalCondition.JAW_DROPPED)) {
             emotionalConditions.clear();
             emotionalConditions.add(EmotionalCondition.JAW_DROPPED);
         } else {
@@ -98,5 +92,11 @@ public class Human {
             emotionalConditions.add(EmotionalCondition.SURPRISED);
         }
         setAttention(HumanAttention.CONCENTRATED);
+    }
+
+    public void becomeNervous() {
+        emotionalConditions.clear();
+        emotionalConditions.add(EmotionalCondition.NERVOUS);
+        setAttention(HumanAttention.ABSENT_MINDED);
     }
 }

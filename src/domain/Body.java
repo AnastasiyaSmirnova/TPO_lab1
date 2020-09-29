@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Body {
     private BodyPosition position;
     private int numberOfHeads;
-    private ArrayList<Head> headsList;
+    private static ArrayList<Head> headsList;
 
     public Body(BodyPosition position) {
         this.position = position;
@@ -23,7 +23,7 @@ public class Body {
         }
     }
 
-    public void setPosition(BodyPosition position) {
+    void setPosition(BodyPosition position) {
         this.position = position;
     }
 
@@ -35,19 +35,19 @@ public class Body {
         return numberOfHeads;
     }
 
-    public void setNumberOfHeads(int numberOfHeads) {
+    private void setNumberOfHeads(int numberOfHeads) {
         this.numberOfHeads = numberOfHeads;
     }
 
-    public boolean addNewHead(){
-        boolean r = headsList.add(new Head(headsList.size()+1));
-        if (r){
+    boolean addNewHead() {
+        boolean r = headsList.add(new Head(headsList.size() + 1));
+        if (r) {
             setNumberOfHeads(headsList.size());
         }
         return r;
     }
 
-    public boolean removeHead(int headNumber) {
+    boolean removeHead(int headNumber) {
         boolean r = headsList.remove(getHeadByNumber(headNumber));
         if (r) {
             setNumberOfHeads(headsList.size());
@@ -55,7 +55,7 @@ public class Body {
         return r;
     }
 
-    public void addActivityToHead(int headNumber, String newActivity) {
+    void addActivityToHead(int headNumber, String newActivity) {
         getHeadByNumber(numberOfHeads).addActivity(newActivity);
     }
 
@@ -100,12 +100,11 @@ public class Body {
             isFree = free;
         }
 
-        public boolean addActivity(String newActivity) {
+        public void addActivity(String newActivity) {
             boolean r = this.activities.add(newActivity);
             if (r) {
                 setFree(false);
             }
-            return r;
         }
 
         public boolean removeActivity(String activity) {

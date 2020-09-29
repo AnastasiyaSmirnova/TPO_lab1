@@ -4,26 +4,31 @@ import java.util.ArrayList;
 
 public class MutateHuman extends Human {
     /* dif between usual VS mutate => number of heads; number of heads define status of being */
-    private int priority;
+    private int level;
     private ArrayList<String> allowedActions;
 
-    public MutateHuman(String name, int headNumbers) {
-        super(name, EmotionalCondition.HAPPY, HumanAttention.ABSENT_MINDED, headNumbers, BodyPosition.SIT);
-        this.priority = headNumbers * 2;
+    public MutateHuman(String name, int headNumbers) throws IncorrectNameException {
+        super(name, EmotionalCondition.HAPPY, HumanAttention.ABSENT_MINDED, Math.max(headNumbers, 1), BodyPosition.SIT);
+        headNumbers = Math.max(headNumbers, 1);
+        setLevel(headNumbers);
         allowedActions = new ArrayList<>();
         setAllowedActions();
     }
 
-    public int getPriority() {
-        return priority;
+    private int getLevel() {
+        return level;
     }
 
-    public void setPriority(int priority) {
-        this.priority = priority;
+    private static int log2(int n) {
+        return (int) (Math.log(n) / Math.log(2));
+    }
+
+    private void setLevel(int headNumber) { // 4 levels
+        this.level = Math.min( log2(headNumber), 3);
     }
 
     private void changePriority() {
-        setPriority(getBody().getNumberOfHeads() * 2);
+        setLevel(getBody().getNumberOfHeads());
         setAllowedActions();
     }
 
@@ -35,14 +40,16 @@ public class MutateHuman extends Human {
     }
 
     public void addNewActivity(int headNumber, String activity) {
-        if (isActivityAllowed(activity)){
+        if (isActivityAllowed(activity)) {
             getBody().addActivityToHead(headNumber, activity);
         }
     }
 
     public void removeHead(int headNumber) {
-        boolean r = getBody().removeHead(headNumber);
-        if (r) changePriority();
+        if (getBody().getNumberOfHeads() > 1) {
+            boolean r = getBody().removeHead(headNumber);
+            if (r) changePriority();
+        }
     }
 
     public ArrayList<String> getAllowedActions() {
@@ -50,6 +57,10 @@ public class MutateHuman extends Human {
     }
 
     private boolean isActivityAllowed(String action) {
+        if (action == null || action.length() == 0 ){
+            return false;
+        }
+
         switch (action) {
             case "control usual humans":
             case "use control panel":
@@ -63,19 +74,18 @@ public class MutateHuman extends Human {
         }
     }
 
-    public void setAllowedActions() {
+    private void setAllowedActions() {
         allowedActions.clear();
-        int currentPriority = getPriority();
+        allowedActions.add("control usual humans");
+
+        int currentPriority = getLevel();
         if (currentPriority > 0) {
-            allowedActions.add("control usual humans");
-        }
-        if (currentPriority > 1) {
             allowedActions.add("use control panel");
         }
-        if (currentPriority > 4) {
+        if (currentPriority > 1) {
             allowedActions.add("use the main computer");
         }
-        if (currentPriority > 8) {
+        if (currentPriority > 2) {
             allowedActions.add("absolute power");
         }
     }
