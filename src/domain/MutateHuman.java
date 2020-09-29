@@ -24,12 +24,19 @@ public class MutateHuman extends Human {
     }
 
     private void setLevel(int headNumber) { // 4 levels
-        this.level = Math.min( log2(headNumber), 3);
+        this.level = Math.min(log2(headNumber), 3);
     }
 
     private void changePriority() {
         setLevel(getBody().getNumberOfHeads());
         setAllowedActions();
+    }
+
+    public boolean isHeadFree(int headNumber) {
+        if (headNumber <= getBody().getNumberOfHeads()) {
+            return getBody().isHeadFree(headNumber);
+        }
+        return false;
     }
 
     public void addNewHead() {
@@ -39,10 +46,34 @@ public class MutateHuman extends Human {
         }
     }
 
-    public void addNewActivity(int headNumber, String activity) {
-        if (isActivityAllowed(activity)) {
-            getBody().addActivityToHead(headNumber, activity);
+    public boolean addNewActivity(int headNumber, String activity) {
+        if (headNumber <= getBody().getNumberOfHeads()) {
+            if (isActivityAllowed(activity)) {
+                return getBody().addActivityToHead(headNumber, activity);
+            } else return false;
         }
+        return false;
+    }
+
+    public boolean removeActivity(int headNumber, String activity) {
+        if (headNumber <= getBody().getNumberOfHeads()) {
+            return getBody().removeActivity(headNumber, activity);
+        }
+        return false;
+    }
+
+    public boolean clearHeadActivityList(int headNumber) {
+        if (headNumber <= getBody().getNumberOfHeads()) {
+            return getBody().clearHeadActivities(headNumber);
+        }
+        return false;
+    }
+
+    public ArrayList<String> getHeadActivities(int headNumber) {
+        if (headNumber <= getBody().getNumberOfHeads()) {
+            return getBody().getHeadActivities(headNumber);
+        }
+        return null;
     }
 
     public void removeHead(int headNumber) {
@@ -57,7 +88,7 @@ public class MutateHuman extends Human {
     }
 
     private boolean isActivityAllowed(String action) {
-        if (action == null || action.length() == 0 ){
+        if (action == null || action.isEmpty()) {
             return false;
         }
 

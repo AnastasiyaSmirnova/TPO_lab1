@@ -3,43 +3,150 @@
   <ID>JAVA</ID>
   <OriginalElement>domain</OriginalElement>
   <nodes>
-    <node x="0.0" y="835.0">domain.StrangeThings</node>
-    <node x="365.0" y="835.0">domain.HumanAttention</node>
-    <node x="557.0" y="0.0">domain.Body</node>
-    <node x="578.0" y="431.0">domain.Body.Head</node>
-    <node x="71.0" y="0.0">domain.Human</node>
-    <node x="0.0" y="497.0">domain.MutateHuman</node>
-    <node x="854.0" y="0.0">domain.EmotionalCondition</node>
-    <node x="266.0" y="563.0">domain.UsualHuman</node>
-    <node x="194.0" y="835.0">domain.BodyPosition</node>
+    <node x="24.046783625730995" y="484.0">domain.HumanAttention</node>
+    <node x="234.421783625731" y="1738.0">domain.UsualHuman.StrangeThings</node>
+    <node x="183.046783625731" y="331.0">domain.Body</node>
+    <node x="151.546783625731" y="0.0">domain.Body.Head</node>
+    <node x="238.025730994152" y="782.0">domain.Human</node>
+    <node x="436.921783625731" y="1285.0">domain.MutateHuman</node>
+    <node x="455.046783625731" y="507.0">domain.IncorrectNameException</node>
+    <node x="668.046783625731" y="451.0">domain.EmotionalCondition</node>
+    <node x="633.8807017543859" y="87.0">domain.BodyPosition</node>
+    <node x="200.921783625731" y="1406.0">domain.UsualHuman</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="domain.Body.Head" target="domain.Body">
-      <point x="0.0" y="-135.5" />
+    <edge source="domain.Body" target="domain.BodyPosition">
+      <point x="63.0" y="-190.5" />
+      <point x="372.046783625731" y="291.0" />
+      <point x="646.4807017543859" y="291.0" />
+      <point x="-50.39999999999998" y="48.5" />
+    </edge>
+    <edge source="domain.Human" target="domain.Body">
+      <point x="-38.111111111111086" y="-201.5" />
+      <point x="371.4146198830409" y="732.0" />
+      <point x="309.046783625731" y="732.0" />
       <point x="0.0" y="190.5" />
     </edge>
+    <edge source="domain.UsualHuman" target="domain.BodyPosition">
+      <point x="86.39999999999998" y="-80.5" />
+      <point x="395.321783625731" y="1255.0" />
+      <point x="843.546783625731" y="1255.0" />
+      <point x="843.546783625731" y="311.0" />
+      <point x="722.0807017543859" y="311.0" />
+      <point x="25.200000000000045" y="48.5" />
+    </edge>
+    <edge source="domain.MutateHuman" target="domain.BodyPosition">
+      <point x="100.80000000000001" y="-201.5" />
+      <point x="663.7217836257311" y="1265.0" />
+      <point x="893.9701754385965" y="1265.0" />
+      <point x="893.9701754385965" y="301.0" />
+      <point x="747.2807017543859" y="301.0" />
+      <point x="50.39999999999998" y="48.5" />
+    </edge>
+    <edge source="domain.Human" target="domain.HumanAttention">
+      <point x="-114.33333333333337" y="-201.5" />
+      <point x="295.19239766081864" y="752.0" />
+      <point x="145.671783625731" y="752.0" />
+      <point x="52.125" y="37.5" />
+    </edge>
+    <edge source="domain.MutateHuman" target="domain.EmotionalCondition">
+      <point x="50.39999999999998" y="-201.5" />
+      <point x="613.321783625731" y="1245.0" />
+      <point x="797.296783625731" y="1245.0" />
+      <point x="797.296783625731" y="762.0" />
+      <point x="812.421783625731" y="762.0" />
+      <point x="61.87499999999997" y="70.5" />
+    </edge>
+    <edge source="domain.UsualHuman" target="domain.HumanAttention">
+      <point x="-86.39999999999998" y="-80.5" />
+      <point x="222.52178362573102" y="1265.0" />
+      <point x="0.0" y="1265.0" />
+      <point x="0.0" y="762.0" />
+      <point x="41.421783625730995" y="762.0" />
+      <point x="-52.125" y="37.5" />
+    </edge>
+    <edge source="domain.UsualHuman" target="domain.EmotionalCondition">
+      <point x="43.200000000000045" y="-80.5" />
+      <point x="352.12178362573104" y="1235.0" />
+      <point x="786.296783625731" y="1235.0" />
+      <point x="786.296783625731" y="762.0" />
+      <point x="771.171783625731" y="762.0" />
+      <point x="20.625" y="70.5" />
+    </edge>
+    <edge source="domain.Body" target="domain.Body.Head">
+      <point x="-105.0" y="-190.5" />
+      <point x="204.046783625731" y="311.0" />
+      <point x="177.796783625731" y="311.0" />
+      <point x="-78.75" y="135.5" />
+    </edge>
+    <edge source="domain.UsualHuman" target="domain.UsualHuman.StrangeThings">
+      <point x="72.0" y="80.5" />
+      <point x="380.921783625731" y="1713.0" />
+      <point x="358.5884502923976" y="1713.0" />
+      <point x="49.66666666666663" y="-69.5" />
+    </edge>
+    <edge source="domain.Human" target="domain.BodyPosition">
+      <point x="76.22222222222223" y="-201.5" />
+      <point x="485.74795321637424" y="742.0" />
+      <point x="657.546783625731" y="742.0" />
+      <point x="657.546783625731" y="311.0" />
+      <point x="696.8807017543859" y="311.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="domain.Human" target="domain.IncorrectNameException">
+      <point x="38.111111111111086" y="-201.5" />
+      <point x="447.6368421052631" y="732.0" />
+      <point x="551.046783625731" y="732.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="domain.UsualHuman.StrangeThings" target="domain.UsualHuman">
+      <point x="-49.66666666666663" y="-69.5" />
+      <point x="259.25511695906437" y="1713.0" />
+      <point x="236.921783625731" y="1713.0" />
+      <point x="-72.0" y="80.5" />
+    </edge>
     <edge source="domain.MutateHuman" target="domain.Human">
-      <point x="0.0" y="-146.5" />
-      <point x="123.0" y="472.0" />
-      <point x="163.5" y="472.0" />
-      <point x="-92.5" y="223.5" />
+      <point x="0.0" y="-201.5" />
+      <point x="562.921783625731" y="1225.0" />
+      <point x="538.150730994152" y="1225.0" />
+      <point x="128.625" y="201.5" />
+    </edge>
+    <edge source="domain.Body.Head" target="domain.Body">
+      <point x="78.75" y="135.5" />
+      <point x="335.296783625731" y="311.0" />
+      <point x="330.046783625731" y="311.0" />
+      <point x="21.0" y="-190.5" />
+    </edge>
+    <edge source="domain.Human" target="domain.EmotionalCondition">
+      <point x="114.33333333333337" y="-201.5" />
+      <point x="523.8590643274854" y="752.0" />
+      <point x="688.671783625731" y="752.0" />
+      <point x="-61.875" y="70.5" />
     </edge>
     <edge source="domain.UsualHuman" target="domain.Human">
-      <point x="0.0" y="-80.5" />
-      <point x="389.0" y="472.0" />
-      <point x="348.5" y="472.0" />
-      <point x="92.5" y="223.5" />
+      <point x="-43.19999999999993" y="-80.5" />
+      <point x="265.72178362573106" y="1265.0" />
+      <point x="280.900730994152" y="1265.0" />
+      <point x="-128.625" y="201.5" />
+    </edge>
+    <edge source="domain.MutateHuman" target="domain.HumanAttention">
+      <point x="-100.80000000000004" y="-201.5" />
+      <point x="462.121783625731" y="1215.0" />
+      <point x="64.296783625731" y="1215.0" />
+      <point x="64.296783625731" y="762.0" />
+      <point x="76.171783625731" y="762.0" />
+      <point x="-17.375" y="37.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5392354124748491" x="509.5" y="487.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="174.5" y="1005.0" />
   <SelectedNodes>
-    <node>domain.StrangeThings</node>
+    <node>domain.HumanAttention</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
-    <Category>Methods</Category>
     <Category>Inner Classes</Category>
+    <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
